@@ -31,21 +31,10 @@ CREATE TABLE Class(
 )
 CREATE TABLE Classroom(
 	Id INT IDENTITY(1, 1),
+	TeacherId INT NOT NULL,
+	ClassId INT NOT NULL,
 	ClassroomNumber INT NOT NULL,
 	ClassroomQuantity INT NULL,
 	CONSTRAINT PK_Classroom_Id PRIMARY KEY (Id)
 )
-CREATE TABLE LessonPlan(
-	Id INT IDENTITY(1, 1),
-	ClassId INT NOT NULL,
-	SubjectId INT NOT NULL,
-	TeacherId INT NOT NULL,
-	ClassroomId INT NOT NULL,
-	StartLessonTime TIME NOT NULL,
-	EndLessonTime TIME NOT NULL,
-	CONSTRAINT PK_LessonPlan_Id PRIMARY KEY (Id),
-	CONSTRAINT FK_LessonPlan_ClassId FOREIGN KEY (ClassId) REFERENCES Class(Id),
-	CONSTRAINT FK_LessonPlan_SubjectId FOREIGN KEY (SubjectId) REFERENCES [Subject](Id),
-	CONSTRAINT FK_LessonPlan_TeacherId FOREIGN KEY (TeacherId) REFERENCES Teacher(Id),
-	CONSTRAINT FK_LessonPlan_ClassroomId FOREIGN KEY (ClassroomId) REFERENCES Classroom(Id)
-)
+
