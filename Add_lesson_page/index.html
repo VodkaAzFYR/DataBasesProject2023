@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+</head>
+<body>
+    <h1 class="title">Add lesson</h1>
+    <div class="container">
+        <select class="select-class" name="select-class" id="select-class"></select>
+        <select id="select-subject" class="select-subject"></select>
+        <select id="select-teacher" class="select-teacher"></select>
+        <div class="select-date">
+            <input class="input-date" type="date" name="date">
+        </div>
+        <div class="select-start-lesson">
+            <input class="input-start-lesson" type="time" name="start-lesson">
+        </div>
+        <div class="select-end-lesson">
+            <input class="input-end-lesson" type="time" name="end-lesson">
+        </div>
+    </div>
+    <div class="send-data-to-server">
+        <button type="submit">Add lesson</button>
+    </div>
+</body>
+</html>

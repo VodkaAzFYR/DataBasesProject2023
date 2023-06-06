@@ -1,0 +1,22 @@
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+.container select{
+    font-size: medium;
+}
+.container .input-date{
+    font-size: medium;
+}
+.send-data-to-server{
+    margin-top: 40px;
+}
