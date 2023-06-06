@@ -33,6 +33,7 @@ CREATE TABLE Lesson(
 	TeacherId INT NOT NULL,
 	StartLesson TIME NOT NULL,
 	EndLesson TIME NOT NULL,
+	LessonDate DATETIME NOT NULL,
 	CONSTRAINT FK_Lesson_ClassId FOREIGN KEY (ClassId) REFERENCES Class (Id),
     CONSTRAINT FK_Lesson_SubjectId FOREIGN KEY (SubjectId) REFERENCES Subject (Id),
     CONSTRAINT FK_Lesson_TeacherId FOREIGN KEY (TeacherId) REFERENCES Teacher (Id) 
