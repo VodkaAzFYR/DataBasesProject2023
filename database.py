@@ -20,3 +20,25 @@ class DataBase:
         return data
 
 
+    def input_teacher_data(self, teacher_name, teacher_lastname):
+        self.cur.execute(f"""INSERT INTO Teacher(TeacherName, TeacherLastname)
+                            VALUES ('{teacher_name}', '{teacher_lastname}')""")
+        self.connect.commit()
+        return True
+
+    def input_class_data(self, class_name):
+        self.cur.execute(f"""INSERT INTO Class(ClassName)
+                        VALUES ('{class_name}')""")
+        self.connect.commit()
+        return True
+
+    def input_lesson_data(self, class_name, subject_name, teacher_name, teacher_lastname, start_lesson, end_lesson, lesson_date):
+        self.cur.execute(f"""INSERT INTO Lesson(ClassId, SubjectId, TeacherId, StartLesson, EndLesson, LessonDate)
+                    VALUES ((SELECT Id FROM Class WHERE ClassName = '{class_name}'), 
+                    (SELECT Id FROM [Subject] WHERE SubjectName = '{subject_name}'), 
+                    (SELECT Id FROM Teacher WHERE TeacherName = '{teacher_name}' AND TeacherLastname = '{teacher_lastname}'), 
+                    '{start_lesson}', '{end_lesson}', '{lesson_date}')""")
+        self.connect.commit()
+        return True
+
+
