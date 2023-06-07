@@ -1,6 +1,7 @@
 import pyodbc
 from datetime import timedelta
 
+
 class DataBase:
     def __init__(self):
         self.database_set_string = ("Driver={ODBC Driver 17 for SQL Server};"
@@ -19,7 +20,6 @@ class DataBase:
         data = self.cur.fetchall()
         return data
 
-
     def input_teacher_data(self, teacher_name, teacher_lastname):
         self.cur.execute(f"""INSERT INTO Teacher(TeacherName, TeacherLastname)
                             VALUES ('{teacher_name}', '{teacher_lastname}')""")
@@ -32,7 +32,8 @@ class DataBase:
         self.connect.commit()
         return True
 
-    def input_lesson_data(self, class_name, subject_name, teacher_name, teacher_lastname, start_lesson, end_lesson, lesson_date):
+    def input_lesson_data(self, class_name, subject_name, teacher_name, teacher_lastname, start_lesson, end_lesson,
+                          lesson_date):
         self.cur.execute(f"""INSERT INTO Lesson(ClassId, SubjectId, TeacherId, StartLesson, EndLesson, LessonDate)
                     VALUES ((SELECT Id FROM Class WHERE ClassName = '{class_name}'), 
                     (SELECT Id FROM [Subject] WHERE SubjectName = '{subject_name}'), 
@@ -55,4 +56,3 @@ class DataBase:
         self.cur.execute(f"""SELECT SubjectName FROM [dbo].[Subject]""")
         data = self.cur.fetchall()
         return data
-

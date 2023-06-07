@@ -1,13 +1,13 @@
 const classes = document.querySelector("#select-class")
 const subjects = document.querySelector("#select-subject")
 const teachers = document.querySelector("#select-teacher")
-
-// const tabClasses = ["1A", "2A", "3C", "5Z", "9F"]
-// const tabsubjects = ["Matematyka", "Polski", "Angielski", "Historia"]
-// const tabTeachers = ["Mateusz Kozłowski", "Rafał Mastalerz", "Kamil Zieliński"]
+const dataLesson = document.querySelector("#input-date")
+const startLesson = document.querySelector("#input-start-lesson")
+const endLesson = document.querySelector("#input-end-lesson")
+const sendDataBtn = document.querySelector("#send-data-btn")
 
 async function insertClasses() {
-    const url = "http://127.0.0.1:8000/get_subjects"
+    const url = "http://127.0.0.1:8000/get_classes"
     const response = await fetch(url)
     const res = await response.json()
     tabClasses = res
@@ -16,7 +16,6 @@ async function insertClasses() {
         optionElement.text = element
         classes.appendChild(optionElement)
     })
-    console.log("Wywołano funckję 1")
 }
 async function insertSubjects(){
     const url = "http://127.0.0.1:8000/get_subjects"
@@ -31,7 +30,7 @@ async function insertSubjects(){
     console.log("Wywołano funckję 2")
 }
 async function insertTeachers(){
-    const url = "http://127.0.0.1:8000/get_subjects"
+    const url = "http://127.0.0.1:8000/get_teachers"
     const response = await fetch(url)
     const res = await response.json()
     tabTeachers = res
@@ -47,12 +46,34 @@ insertClasses()
 insertSubjects()
 insertTeachers()
 
+sendDataBtn.addEventListener("click", handleSendDataToServer)
 
+function handleSendDataToServer(){
+    const className = classes.value;
+    const subject = subjects.value;
+    const teacher = teachers.value;
+    const dateLesson = dataLesson.value;
+    const startLesson = startLesson.value;
 
-// if (res.includes("||")) {
-//     subject_list = res.split("||")
-// } else {
-//     subject_list = res
-// }
-// const insert_element = document.querySelector(".select-subject")
-// let temp_element = ""
+    const data = {
+        className: className,
+        subject: subject,
+        teacher: teacher,
+        dateLesson: dateLesson,
+        startLesson: startLesson
+    };
+
+    fetch('http://127.0.0.1:8000/get_lesson_plan', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        console.log("Response:", response)
+    })
+    .catch(error => {
+        console.log("Error:", error)
+    });
+}
