@@ -9,6 +9,19 @@ db = DataBase()
 def root():
     return {"status": "ready"}
 
+@app.get("/get_subjects")
+def get_subjects():
+    subjects = db.select_all_subjects()
+    subjects_list = [f"{i[0]}" for i in subjects]
+    return str(subjects_list)
+
+
+@app.get("/get_classes")
+def get_teachers():
+    classes = db.select_all_classes()
+    classes_list = [f"{i[0]}" for i in classes]
+    return classes_list
+
 
 @app.get("/get_lessons_plan")
 def get_lessons_plan(date, class_name):
@@ -19,6 +32,12 @@ def get_lessons_plan(date, class_name):
 
 # @app.post("/input_lessons_plan")
 # def input_lessons_plan(class_name, subject_name, teacher_name, teacher_lastname, start_lesson, end_lesson, lesson_date):
+@app.get("/get_teachers")
+def get_teachers():
+    teachers = db.select_all_teachers()
+    teachers_list = [f"{i[0]} {i[1]}" for i in teachers]
+    return str(teachers_list)
+
 
 @app.post("/add_teacher")
 def add_teacher(teacher_name, teacher_lastname):

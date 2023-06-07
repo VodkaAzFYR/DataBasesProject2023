@@ -41,4 +41,18 @@ class DataBase:
         self.connect.commit()
         return True
 
+    def select_all_teachers(self):
+        self.cur.execute(f"""SELECT TeacherName, TeacherLastname FROM [dbo].[Teacher]""")
+        data = self.cur.fetchall()
+        return data
+
+    def select_all_classes(self):
+        self.cur.execute(f"""SELECT ClassName FROM [dbo].[Class]""")
+        data = self.cur.fetchall()
+        return data
+
+    def select_all_subjects(self):
+        self.cur.execute(f"""SELECT SubjectName FROM [dbo].[Subject]""")
+        data = self.cur.fetchall()
+        return data
 
