@@ -1,19 +1,19 @@
 from fastapi import FastAPI
-from database import DataBase
+from database import *
 from datetime import datetime
 from fastapi.middleware.cors import CORSMiddleware
 import os
 
 app = FastAPI()
-db = DataBase()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Możesz dostosować to do konkretnych adresów URL
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 @app.get("/")
 def root():
@@ -22,14 +22,14 @@ def root():
 
 @app.get("/get_subjects")
 def get_subjects():
-    subjects = db.select_all_subjects()
+    subjects = select_all_subjects()
     subjects_list = [f"{i[0]}" for i in subjects]
     return subjects_list
 
 
 @app.get("/get_classes")
 def get_teachers():
-    classes = db.select_all_classes()
+    classes = select_all_classes()
     classes_list = [f"{i[0]}" for i in classes]
     return classes_list
 
@@ -37,7 +37,7 @@ def get_teachers():
 @app.get("/get_lessons_plan")
 def get_lessons_plan(date, class_name):
     datetime_date = datetime.strptime(date, f"%d-%m-%Y")
-    data = db.select_lessons_data(date=datetime_date, class_name=class_name)
+    data = select_lessons_data(date=datetime_date, class_name=class_name)
     return f"{data}"
 
 
@@ -45,20 +45,20 @@ def get_lessons_plan(date, class_name):
 # def input_lessons_plan(class_name, subject_name, teacher_name, teacher_lastname, start_lesson, end_lesson, lesson_date):
 @app.get("/get_teachers")
 def get_teachers():
-    teachers = db.select_all_teachers()
+    teachers = select_all_teachers()
     teachers_list = [f"{i[0]} {i[1]}" for i in teachers]
     return teachers_list
 
 
 @app.post("/add_teacher")
 def add_teacher(teacher_name, teacher_lastname):
-    db.input_teacher_data(teacher_name=teacher_name, teacher_lastname=teacher_lastname)
+    input_teacher_data(teacher_name=teacher_name, teacher_lastname=teacher_lastname)
     return {"status": "ok"}
 
 
 @app.post("/add_class")
 def add_class(class_name):
-    db.input_class_data(class_name=class_name.lower())
+    input_class_data(class_name=class_name.lower())
     return {"status": "ok"}
 
 
@@ -66,7 +66,7 @@ def add_class(class_name):
 
 @app.post("/add_lessons")
 def add_lessons(class_name, subject_name, teacher_name, teacher_lastname, lesson_date, start_lesson, end_lesson):
-    db.input_lesson_data(class_name=class_name, subject_name=subject_name, teacher_name=teacher_name,
+    input_lesson_data(class_name=class_name, subject_name=subject_name, teacher_name=teacher_name,
                          teacher_lastname=teacher_lastname,
                          lesson_date=lesson_date, start_lesson=start_lesson, end_lesson=end_lesson)
     return {"status": "ok"}

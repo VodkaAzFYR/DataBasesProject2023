@@ -10,6 +10,7 @@ async function insertClasses() {
     const url = "http://127.0.0.1:8000/get_classes"
     const response = await fetch(url)
     const res = await response.json()
+    console.log(typeof res)
     tabClasses = res
     tabClasses.forEach((element) => {
         optionElement = document.createElement("option")
@@ -22,7 +23,7 @@ async function insertSubjects() {
     const url = "http://127.0.0.1:8000/get_subjects";
     const response = await fetch(url);
     const res = await response.text(); // Pobierz odpowiedź jako ciąg znaków
-
+    console.log(typeof res)
     const tabSubjects = res
 
     tabSubjects.forEach((element) => {
@@ -38,7 +39,7 @@ async function insertTeachers() {
     const url = "http://127.0.0.1:8000/get_teachers";
     const response = await fetch(url);
     const res = await response.text(); // Pobierz odpowiedź jako ciąg znaków
-
+    console.log(typeof res)
     const tabTeachers = res
 
     tabTeachers.forEach((element) => {
