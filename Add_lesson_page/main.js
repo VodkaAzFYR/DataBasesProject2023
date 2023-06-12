@@ -2,8 +2,8 @@ const classes = document.querySelector("#select-class")
 const subjects = document.querySelector("#select-subject")
 const teachers = document.querySelector("#select-teacher")
 const dataLesson = document.querySelector("#input-date")
-const startLesson = document.querySelector("#input-start-lesson")
-const endLesson = document.querySelector("#input-end-lesson")
+const startLessonInput = document.querySelector("#input-start-lesson")
+const endLessonInput = document.querySelector("#input-end-lesson")
 const sendDataBtn = document.querySelector("#send-data-btn")
 
 async function insertClasses() {
@@ -67,32 +67,35 @@ insertTeachers()
 
 sendDataBtn.addEventListener("click", handleSendDataToServer)
 
-function handleSendDataToServer(){
+async function handleSendDataToServer(){
     const className = classes.value;
     const subject = subjects.value;
     const teacher = teachers.value;
     const dateLesson = dataLesson.value;
-    const startLesson = startLesson.value;
+    const startLesson = startLessonInput.value;
+    const endLesson = endLessonInput.value;
 
-    const data = {
-        className: className,
-        subject: subject,
-        teacher: teacher,
-        dateLesson: dateLesson,
-        startLesson: startLesson
+    const obj = {
+        "class_name": className,
+        "subject_name": subject,
+        "teacher_name": teacher,
+        "lesson_date": dateLesson,
+        "start_lesson": startLesson,
+        "end_lesson": endLesson
     };
-
-    fetch('http://127.0.0.1:8000/add_lessons', {
+    const data = JSON.stringify(obj);
+    console.log(data)
+    await fetch('http://127.0.0.1:8000/add_lessons', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
-    })
-    .then(response => {
-        console.log("Response:", response)
-    })
-    .catch(error => {
-        console.log("Error:", error)
-    });
+        body: data
+      })
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        alert("Wystąpił błąd: " + error)
+      });
 }

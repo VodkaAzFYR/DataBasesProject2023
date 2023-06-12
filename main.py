@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Body
 from database import *
 from datetime import datetime
 from fastapi.middleware.cors import CORSMiddleware
@@ -36,7 +36,7 @@ def get_teachers():
 
 @app.get("/get_lessons_plan")
 def get_lessons_plan(date, class_name):
-    datetime_date = datetime.strptime(date, f"%d-%m-%Y")
+    datetime_date = datetime.strptime(date, "%Y-%m-%d")
     data = select_lessons_data(date=datetime_date, class_name=class_name)
     return f"{data}"
 
@@ -65,12 +65,15 @@ def add_class(class_name):
 # [1b, Matematyka, Mateusz, Kozłowski, 06-06-2023, 8.30, 9,30]
 
 @app.post("/add_lessons")
-def add_lessons(class_name, subject_name, teacher_name, teacher_lastname, lesson_date, start_lesson, end_lesson):
-    input_lesson_data(class_name=class_name, subject_name=subject_name, teacher_name=teacher_name,
-                         teacher_lastname=teacher_lastname,
-                         lesson_date=lesson_date, start_lesson=start_lesson, end_lesson=end_lesson)
+def add_lessons(data: dict = Body(...)):
+    # print(data["class_name"], data["subject_name"], data["teacher_name"].split()[0],
+    #                      data["teacher_name"].split()[1],
+    #                      data["lesson_    date"], data["start_lesson"], data["end_lesson"])
+    input_lesson_data(class_name=data["class_name"], subject_name=data["subject_name"], teacher_name=data["teacher_name"].split()[0],
+                         teacher_lastname=data["teacher_name"].split()[1],
+                         lesson_date=data["lesson_date"], start_lesson=data["start_lesson"], end_lesson=data["end_lesson"])
     return {"status": "ok"}
 
-
+#{"class_name":"1a","subject_name":"Matematyka","teacher_name":"Mateusz Kozlowski","lesson_date":"2023-06-12","start_lesson":"10:11","end_lesson":"11:11"}
 if __name__ == "__main__":
     os.system("python -m uvicorn main:app --reload")  # --host 0.0.0.0
