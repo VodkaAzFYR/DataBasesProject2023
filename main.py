@@ -36,7 +36,7 @@ def get_teachers():
 
 @app.get("/get_lessons_plan")
 def get_lessons_plan(date, class_name):
-    datetime_date = datetime.strptime(date, "%Y-%m-%d")
+    datetime_date = datetime.strptime(date, f"%d-%m-%Y")
     data = select_lessons_data(date=datetime_date, class_name=class_name)
     return f"{data}"
 
@@ -74,6 +74,6 @@ def add_lessons(data: dict = Body(...)):
                          lesson_date=data["lesson_date"], start_lesson=data["start_lesson"], end_lesson=data["end_lesson"])
     return {"status": "ok"}
 
-#{"class_name":"1a","subject_name":"Matematyka","teacher_name":"Mateusz Kozlowski","lesson_date":"2023-06-12","start_lesson":"10:11","end_lesson":"11:11"}
+
 if __name__ == "__main__":
     os.system("python -m uvicorn main:app --reload")  # --host 0.0.0.0

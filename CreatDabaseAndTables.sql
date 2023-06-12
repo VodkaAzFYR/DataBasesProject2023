@@ -49,5 +49,8 @@
 --INSERT INTO Lesson(ClassId, SubjectId, TeacherId, StartLesson, EndLesson, LessonDate)
 --VALUES ((SELECT Id FROM Class WHERE ClassName = '1a'), (SELECT Id FROM [Subject] WHERE SubjectName = 'Fizyka'), (SELECT Id FROM Teacher WHERE TeacherName = 'Mateusz' AND TeacherLastname = 'Koz³owski'), '11:00', '11:45', '2023-06-09')
 
-
+SELECT * FROM Class
 SELECT * FROM Lesson
+SELECT S.SubjectName, T.TeacherName, T.TeacherLastname, CONVERT(NVARCHAR(50), L.StartLesson), CONVERT(NVARCHAR(50), L.EndLesson) from [dbo].[Lesson] L JOIN [dbo].[Class] C ON L.ClassId = C.Id
+                     JOIN [dbo].[Subject] S ON L.SubjectId = S.Id
+                     JOIN [dbo].[Teacher] T ON L.TeacherId = T.Id WHERE DATEADD(dd, 0, DATEDIFF(dd, 0, L.LessonDate)) = '2023-06-09' AND C.ClassName = '2b'

@@ -11,21 +11,35 @@
 <body>
     <h1 class="title">Add lesson</h1>
     <div class="container">
-        <select class="select-class" name="select-class" id="select-class"></select>
-        <select id="select-subject" class="select-subject"></select>
-        <select id="select-teacher" class="select-teacher"></select>
+        <div class="class-container">
+            <h3>Klasa</h3>
+            <select class="select-class" name="select-class" id="select-class"></select>
+        </div>
+        <div class="subject-container">
+            <h3>Przedmiot</h3>
+            <select id="select-subject" class="select-subject"></select>
+        </div>
+        <div class="teacher-container">
+            <h3>Nauczyciel</h3>
+            <select id="select-teacher" class="select-teacher"></select>
+        </div>
+       
         <div class="select-date">
+            <h3>Data</h3>
             <input id="input-date" class="input-date" type="date" name="date">
         </div>
         <div class="select-start-lesson">
+            <h3>Rozpoczęcie lekcji</h3>
             <input id="input-start-lesson" class="input-start-lesson" type="time" name="start-lesson">
         </div>
         <div class="select-end-lesson">
+            <h3>Zakończenie lekcji</h3>
             <input id="input-end-lesson" class="input-end-lesson" type="time" name="end-lesson">
         </div>
     </div>
     <div class="send-data-to-server">
         <button id="send-data-btn" type="submit">Add lesson</button>
-    </div>
+    </div><br>
+    <a href="../Page_view/index.html"><button type="button">Return</button></a>
 </body>
 </html>
