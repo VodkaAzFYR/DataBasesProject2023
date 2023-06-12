@@ -18,13 +18,17 @@ async function insertClasses() {
         classes.appendChild(optionElement)
     })
     console.log("Wywołano funckję 3")
-}
+} 
 async function insertSubjects() {
     const url = "http://127.0.0.1:8000/get_subjects";
     const response = await fetch(url);
     const res = await response.text(); // Pobierz odpowiedź jako ciąg znaków
-    console.log(typeof res)
-    const tabSubjects = res
+    const tabSubjects = JSON.parse(res)
+
+    const object = {}
+    tabSubjects.forEach((item, index) => {
+        object[index] = item
+    })
 
     tabSubjects.forEach((element) => {
         optionElement = document.createElement("option");
@@ -39,8 +43,13 @@ async function insertTeachers() {
     const url = "http://127.0.0.1:8000/get_teachers";
     const response = await fetch(url);
     const res = await response.text(); // Pobierz odpowiedź jako ciąg znaków
-    console.log(typeof res)
-    const tabTeachers = res
+    const tabTeachers = JSON.parse(res)
+
+    const object = {}
+    tabTeachers.forEach((item, index) => {
+        object[index] = item
+    })
+
 
     tabTeachers.forEach((element) => {
         optionElement = document.createElement("option");
@@ -73,7 +82,7 @@ function handleSendDataToServer(){
         startLesson: startLesson
     };
 
-    fetch('http://127.0.0.1:8000/get_lesson_plan', {
+    fetch('http://127.0.0.1:8000/add_lessons', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
