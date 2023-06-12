@@ -1,11 +1,19 @@
 from fastapi import FastAPI
 from database import DataBase
 from datetime import datetime
+from fastapi.middleware.cors import CORSMiddleware
 import os
 
 app = FastAPI()
 db = DataBase()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Możesz dostosować to do konkretnych adresów URL
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def root():
@@ -16,7 +24,7 @@ def root():
 def get_subjects():
     subjects = db.select_all_subjects()
     subjects_list = [f"{i[0]}" for i in subjects]
-    return str(subjects_list)
+    return subjects_list
 
 
 @app.get("/get_classes")
@@ -39,7 +47,7 @@ def get_lessons_plan(date, class_name):
 def get_teachers():
     teachers = db.select_all_teachers()
     teachers_list = [f"{i[0]} {i[1]}" for i in teachers]
-    return str(teachers_list)
+    return teachers_list
 
 
 @app.post("/add_teacher")

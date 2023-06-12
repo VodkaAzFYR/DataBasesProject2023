@@ -16,31 +16,40 @@ async function insertClasses() {
         optionElement.text = element
         classes.appendChild(optionElement)
     })
-}
-async function insertSubjects(){
-    const url = "http://127.0.0.1:8000/get_subjects"
-    const response = await fetch(url)
-    const res = await response.json()
-    tabsubjects = res
-    tabsubjects.forEach((element) => {
-        optionElement = document.createElement("option")
-        optionElement.text = element
-        subjects.appendChild(optionElement)
-    })
-    console.log("Wywołano funckję 2")
-}
-async function insertTeachers(){
-    const url = "http://127.0.0.1:8000/get_teachers"
-    const response = await fetch(url)
-    const res = await response.json()
-    tabTeachers = res
-    tabTeachers.forEach((element) => {
-        optionElement = document.createElement("option")
-        optionElement.text = element
-        teachers.appendChild(optionElement)
-    })
     console.log("Wywołano funckję 3")
 }
+async function insertSubjects() {
+    const url = "http://127.0.0.1:8000/get_subjects";
+    const response = await fetch(url);
+    const res = await response.text(); // Pobierz odpowiedź jako ciąg znaków
+
+    const tabSubjects = res
+
+    tabSubjects.forEach((element) => {
+        optionElement = document.createElement("option");
+        optionElement.text = element;
+        subjects.appendChild(optionElement);
+    });
+
+    console.log("Wywołano funkcję insertSubjects");
+}
+
+async function insertTeachers() {
+    const url = "http://127.0.0.1:8000/get_teachers";
+    const response = await fetch(url);
+    const res = await response.text(); // Pobierz odpowiedź jako ciąg znaków
+
+    const tabTeachers = res
+
+    tabTeachers.forEach((element) => {
+        optionElement = document.createElement("option");
+        optionElement.text = element;
+        teachers.appendChild(optionElement);
+    });
+
+    console.log("Wywołano funkcję insertTeachers");
+}
+
 
 insertClasses()
 insertSubjects()
