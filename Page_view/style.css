@@ -60,10 +60,15 @@ header{
     flex-direction: column;
     align-items: center;
 }
-.add-lesson-btn{
+.button-container{
     position: absolute;
     top: 30px;
     right: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.add-lesson-btn, .add-teacher-btn, .add-subject-btn, .add-class-btn{
     width: 100px;
     font-size: medium;
     background-color: darkblue;
@@ -73,9 +78,9 @@ header{
     height: 32px;
     padding: 5px;
 }
-.add-lesson-btn:hover{
+.add-lesson-btn:hover, .add-teacher-btn:hover, .add-class-btn:hover, .add-subject-btn:hover{
     transform: scale(1.05);
 }
-.add-lesson-btn:active{
+.add-lesson-btn:active, .add-teacher-btn:active, .add-class-btn:active, .add-subject-btn:active{
     background-color: blue;
 }

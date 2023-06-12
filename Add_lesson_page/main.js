@@ -73,26 +73,6 @@ function handleSendDataToServer(){
     const teacher = teachers.value;
     const dateLesson = dataLesson.value;
     const startLesson = startLesson.value;
-
-    const data = {
-        className: className,
-        subject: subject,
-        teacher: teacher,
-        dateLesson: dateLesson,
-        startLesson: startLesson
-    };
-
-    fetch('http://127.0.0.1:8000/add_lessons', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => {
-        console.log("Response:", response)
-    })
-    .catch(error => {
-        console.log("Error:", error)
-    });
+    const endLesson = endLesson.value;
+    console.log(className, subject, teacher, dateLesson, startLesson, endLesson)
 }

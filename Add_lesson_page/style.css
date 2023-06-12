@@ -20,3 +20,8 @@ body{
 .send-data-to-server{
     margin-top: 40px;
 }
+.container div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
