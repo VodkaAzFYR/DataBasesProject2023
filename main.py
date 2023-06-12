@@ -36,9 +36,9 @@ def get_teachers():
 
 @app.get("/get_lessons_plan")
 def get_lessons_plan(date, class_name):
-    datetime_date = datetime.strptime(date, f"%d-%m-%Y")
+    datetime_date = datetime.strptime(date, f"%Y-%m-%d")
     data = select_lessons_data(date=datetime_date, class_name=class_name)
-    return f"{data}"
+    return str (data)
 
 
 # @app.post("/input_lessons_plan")
@@ -50,13 +50,13 @@ def get_teachers():
     return teachers_list
 
 
-@app.post("/add_teacher")
+@app.get("/add_teacher")
 def add_teacher(teacher_name, teacher_lastname):
     input_teacher_data(teacher_name=teacher_name, teacher_lastname=teacher_lastname)
     return {"status": "ok"}
 
 
-@app.post("/add_class")
+@app.get("/add_class")
 def add_class(class_name):
     input_class_data(class_name=class_name.lower())
     return {"status": "ok"}
