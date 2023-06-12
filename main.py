@@ -52,13 +52,14 @@ def get_teachers():
 
 @app.post("/add_teacher")
 def add_teacher(teacher_name, teacher_lastname):
-    input_teacher_data(teacher_name=teacher_name, teacher_lastname=teacher_lastname)
+    # input_teacher_data(teacher_name=teacher_name, teacher_lastname=teacher_lastname)
+    print(teacher_name, teacher_lastname)
     return {"status": "ok"}
 
 
 @app.post("/add_class")
 def add_class(class_name):
-    input_class_data(class_name=class_name.lower())
+    # input_class_data(class_name=class_name.lower())
     return {"status": "ok"}
 
 
@@ -66,9 +67,10 @@ def add_class(class_name):
 
 @app.post("/add_lessons")
 def add_lessons(class_name, subject_name, teacher_name, teacher_lastname, lesson_date, start_lesson, end_lesson):
-    input_lesson_data(class_name=class_name, subject_name=subject_name, teacher_name=teacher_name,
-                         teacher_lastname=teacher_lastname,
-                         lesson_date=lesson_date, start_lesson=start_lesson, end_lesson=end_lesson)
+    # input_lesson_data(class_name=class_name, subject_name=subject_name, teacher_name=teacher_name,
+    #                      teacher_lastname=teacher_lastname,
+    #                      lesson_date=lesson_date, start_lesson=start_lesson, end_lesson=end_lesson)
+    print(class_name, subject_name, teacher_name, teacher_lastname, lesson_date, start_lesson, end_lesson)
     return {"status": "ok"}
 
 
