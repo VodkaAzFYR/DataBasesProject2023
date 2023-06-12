@@ -67,7 +67,7 @@ insertTeachers()
 
 sendDataBtn.addEventListener("click", handleSendDataToServer)
 
-function handleSendDataToServer(){
+async function handleSendDataToServer(){
     const className = classes.value;
     const subject = subjects.value;
     const teacher = teachers.value;
