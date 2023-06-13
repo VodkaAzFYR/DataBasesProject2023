@@ -84,3 +84,9 @@ header{
 .add-lesson-btn:active, .add-teacher-btn:active, .add-class-btn:active{
     background-color: blue;
 }
+#items-container-subjects, #items-container-teachers, #items-container-time-range{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
