@@ -36,7 +36,7 @@ def get_teachers():
 
 @app.get("/get_lessons_plan")
 def get_lessons_plan(date, class_name):
-    datetime_date = datetime.strptime(date, f"%Y-%m-%d")
+    datetime_date = datetime.strptime(date, f"%d-%m-%Y")
     data = select_lessons_data(date=datetime_date, class_name=class_name)
     return str (data)
 

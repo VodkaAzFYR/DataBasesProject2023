@@ -36,13 +36,20 @@ async function handleSendDataToServer() {
     const data = await response.text(); // Otrzymany ciąg znaków
 
     // Przetwarzanie danych
+    let i = 0
     const lessonsArray = [];
     const tuples = data.substring(2, data.length - 2).split("), (");
     
     tuples.forEach((tuple) => {
-      const values = tuple.split(", ");
-    
-      const lessonName = values[0].substring(1, values[0].length - 1);
+        let lessonName
+        const values = tuple.split(", ");
+        if (i == 0){
+            lessonName = values[0].substring(2, values[0].length - 1);
+        }
+        else{
+            lessonName = values[0].substring(1, values[0].length - 1);
+        }
+        i++
       const teacherFirstName = values[1].substring(1, values[1].length - 1);
       const teacherLastName = values[2].substring(1, values[2].length - 1);
       const startTime = values[3].substring(1, values[3].length - 1);
@@ -61,7 +68,11 @@ async function handleSendDataToServer() {
       teacherName.textContent = teacherFirstName + " " + teacherLastName;
     
       const lessonTime = document.createElement("p");
-      lessonTime.textContent = startTime + " - " + endTime;
+      let splittedStartTime = startTime.split(':').slice(0, 2)
+      let formattedStartTime = splittedStartTime.join(":")
+      let splittedEndTime = endTime.split(':').slice(0, 2)
+      let formattedEndTime = splittedEndTime.join(":")
+      lessonTime.textContent = formattedStartTime + " - " + formattedEndTime;
     
       // Dodawanie elementów do odpowiednich kolumn
       subjectColumn.appendChild(subjectName);
